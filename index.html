@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" id="author" id="author" content="Sam Ireland">
+    <meta name="description" id="description" id="description" content="How Long Until">
+    <meta name="viewport" id="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <title>Time Til</title>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <style>
+        body {
+            margin: 0px;
+            padding: 50px;
+            font-family: Tahoma;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-gap: 5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cell {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        label, select, input {
+            display: block;
+        }
+    </style>
+</head>
+    <script>
+        function durationToString(duration) {
+            var s = "";
+            if (duration.years()) {
+                s += Math.abs(duration.years()) + " years, "
+            }
+            if (duration.months()) {
+                s += Math.abs(duration.months()) + " months, "
+            }
+            if (duration.days()) {
+                s += Math.abs(duration.days()) + " days, "
+            }
+            if (duration.hours()) {
+                s += Math.abs(duration.hours()) + " hours, "
+            }
+            if (duration.minutes()) {
+                s += Math.abs(duration.minutes()) + " minutes, "
+            }
+            if (duration.seconds()) {
+                s += Math.abs(duration.seconds()) + " seconds, "
+            }
+            s = s.slice(0, s.length - 2);
+            if (duration < 0) {
+                s += " from now";
+            } else {
+                s += " ago"
+            }
+            return s;
+        }
+
+
+        var params = window.location.search.substr(1);
+        if (params) {
+            params = params.split("&");
+            var values = [];
+            $.each(params, function() {
+                values.push(this.split("=")[1]);
+            })
+            var string = values[0] + "-" + values[1].padStart(2, '0') + "-" + values[2].padStart(2, '0') + " " + values[3].padStart(2, '0') + ":" + values[4].padStart(2, '0');
+            var datetime = moment(string);
+
+            document.write("<div id='datetime'></div>");
+            document.write("<div id='delta'></div>");
+            document.write("<div id='mirror'></div>");
+
+            function updateValues() {
+                var now = moment();
+                var difference = moment.duration(now - datetime);
+                var mirror = moment(now + difference);
+
+                $("#datetime").html(datetime.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+                $("#delta").html(durationToString(difference));
+                $("#mirror").html(mirror.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+            }
+
+            updateValues(datetime);
+
+
+            var intervalID = window.setInterval(updateValues, 1000);
+
+
+        }
+
+
+    </script>
+
+    <form>
+        <div class="cell">
+            <label>Year</label>
+            <select name="year" id="year"></select>
+        </div>
+        <div class="cell">
+            <label>Month</label>
+            <select name="month" id="month"></select>
+        </div>
+        <div class="cell">
+            <label>Day</label>
+            <select name="day" id="day"></select>
+        </div>
+        <div class="cell">
+            <label>Hour</label>
+            <select name="hour" id="hour"></select>
+        </div>
+        <div class="cell">
+            <label>Minutes</label>
+            <select name="minute" id="minute"></select>
+        </div>
+        <div class="cell">
+            <input type="submit" value="Go">
+        </div>
+    </form>
+
+
+    <script>
+        for (var y = 1900; y < 2100; y++) {
+            $('#year').append($('<option>', {value: y, text: y}));
+        }
+        for (var m = 1; m <= 12; m++) {
+            $('#month').append($('<option>', {value: m, text: [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ][m - 1]}));
+        }
+        for (var d = 1; d <= 31; d++) {
+            $('#day').append($('<option>', {value: d, text: d}));
+        }
+        for (var d = 0; d <= 23; d++) {
+            $('#hour').append($('<option>', {value: d, text: d}));
+        }
+        for (var d = 0; d <= 59; d++) {
+            $('#minute').append($('<option>', {value: d, text: d}));
+        }
+    </script>
+<body>
+
+</body>
+</html>
