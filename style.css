@@ -1,0 +1,23 @@
+body {
+    margin: 0px;
+    padding: 50px;
+    font-family: Tahoma;
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cell {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+label, select, input {
+    display: block;
+}
