@@ -37,7 +37,7 @@ $( document ).ready(function() {
         })
         var string = values[0] + "-" + values[1].padStart(2, '0') + "-" + values[2].padStart(2, '0') + " " + values[3].padStart(2, '0') + ":" + values[4].padStart(2, '0');
         var datetime = moment(string);
-        
+
 
         function updateValues() {
             var now = moment();
@@ -74,6 +74,4 @@ $( document ).ready(function() {
     $('#year').val(now.year()).prop('selected', true);
     $('#month').val(now.month() + 1).prop('selected', true);
     $('#day').val(now.date()).prop('selected', true);
-    $('#hour').val(now.hour()).prop('selected', true);
-    $('#minute').val(now.minute()).prop('selected', true);
 });
