@@ -105,6 +105,7 @@
 
 
     <script>
+        var now = moment();
         for (var y = 1900; y < 2100; y++) {
             $('#year').append($('<option>', {value: y, text: y}));
         }
@@ -122,6 +123,11 @@
         for (var d = 0; d <= 59; d++) {
             $('#minute').append($('<option>', {value: d, text: d}));
         }
+        $('#year').val(now.year()).prop('selected', true);
+        $('#month').val(now.month() + 1).prop('selected', true);
+        $('#day').val(now.date()).prop('selected', true);
+        $('#hour').val(now.hour()).prop('selected', true);
+        $('#minute').val(now.minute()).prop('selected', true);
     </script>
 <body>
 
