@@ -8,7 +8,7 @@
     <title>Time Til</title>
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Patua+One|Montserrat" rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
     <script>
@@ -51,10 +51,14 @@
             })
             var string = values[0] + "-" + values[1].padStart(2, '0') + "-" + values[2].padStart(2, '0') + " " + values[3].padStart(2, '0') + ":" + values[4].padStart(2, '0');
             var datetime = moment(string);
-
-            document.write("<div id='datetime'></div>");
-            document.write("<div id='delta'></div>");
-            document.write("<div id='mirror'></div>");
+            document.write("<div class='times'>");
+            document.write("<div><div class='label'>Target</div>");
+            document.write("<div id='datetime' class='value'></div></div>");
+            document.write("<div><div class='label'>When</div>");
+            document.write("<div id='delta' class='value'></div></div>");
+            document.write("<div><div class='label'>Mirror</div>");
+            document.write("<div id='mirror' class='value'></div></div>");
+            document.write("</div>");
 
             function updateValues() {
                 var now = moment();
@@ -99,6 +103,7 @@
             <select name="minute" id="minute"></select>
         </div>
         <div class="cell">
+            <label>.</label>
             <input type="submit" value="Go">
         </div>
     </form>
