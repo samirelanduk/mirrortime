@@ -1,22 +1,22 @@
 function durationToString(duration) {
     var s = "";
     if (duration.years()) {
-        s += Math.abs(duration.years()) + " years, "
+        s += Math.abs(duration.years()) + " year" + (Math.abs(duration.years()) == 1 ? "" : "s") + ", "
     }
     if (duration.months()) {
-        s += Math.abs(duration.months()) + " months, "
+        s += Math.abs(duration.months()) + " month" + (Math.abs(duration.months()) == 1 ? "" : "s") + ", "
     }
     if (duration.days()) {
-        s += Math.abs(duration.days()) + " days, "
+        s += Math.abs(duration.days()) + " day" + (Math.abs(duration.days()) == 1 ? "" : "s") + ", "
     }
     if (duration.hours()) {
-        s += Math.abs(duration.hours()) + " hours, "
+        s += Math.abs(duration.hours()) + " hour" + (Math.abs(duration.hours()) == 1 ? "" : "s") + ", "
     }
     if (duration.minutes()) {
-        s += Math.abs(duration.minutes()) + " minutes, "
+        s += Math.abs(duration.minutes()) + " minute" + (Math.abs(duration.minutes()) == 1 ? "" : "s") + ", "
     }
     if (duration.seconds()) {
-        s += Math.abs(duration.seconds()) + " seconds, "
+        s += Math.abs(duration.seconds()) + " second" + (Math.abs(duration.seconds()) == 1 ? "" : "s") + ", "
     }
     s = s.slice(0, s.length - 2);
     if (duration < 0) {
